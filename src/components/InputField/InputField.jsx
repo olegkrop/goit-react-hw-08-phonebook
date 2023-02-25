@@ -9,9 +9,9 @@ export class InputField extends Component {
 
     return (
       <>
-        <label className={style.contactFormLabel}>{label}</label>
+        <label className={style.label}>{label}</label>
         <input
-          className={style.contactFormInput}
+          className={style.input}
           type={type}
           name={name}
           pattern={pattern}

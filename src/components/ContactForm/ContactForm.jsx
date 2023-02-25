@@ -20,11 +20,11 @@ export class ContactForm extends Component {
 
     return (
       <form
-        className={style.contactFormTable}
+        className={style.table}
         onSubmit={event => onSubmit({ event, name, number })}
       >
         <InputField
-          label="name"
+          label="Name"
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я
@@ -36,7 +36,7 @@ export class ContactForm extends Component {
           onChange={this.handleChange}
         />
         <InputField
-          label="number"
+          label="Number"
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -44,7 +44,7 @@ export class ContactForm extends Component {
           required={true}
           onChange={this.handleChange}
         />
-        <button type="submit" className={style.contactFormButton}>
+        <button type="submit" className={style.button}>
           Add contact
         </button>
       </form>

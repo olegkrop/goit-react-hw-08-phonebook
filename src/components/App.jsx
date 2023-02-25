@@ -57,10 +57,11 @@ export class App extends Component {
   render() {
     return (
       <>
-        <div className={style.boxApp}>
+        <div className={style.app}>
           <Section title="Phonebook">
             <ContactForm onSubmit={this.onSubmit} />
           </Section>
+          <p></p>
           <Section title="Contacts">
             <Filter onSearch={this.onSearch} filter={this.state.filter} />
             <ContactList

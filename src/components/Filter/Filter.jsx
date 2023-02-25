@@ -7,9 +7,9 @@ export class Filter extends Component {
     const { filter, onSearch } = this.props;
     return (
       <>
-        <p className={style.filterTitle}>Find contacts by name</p>
+        <p className={style.title}>Find contacts by name</p>
         <input
-          className={style.filterInput}
+          className={style.input}
           type="text"
           value={filter}
           onChange={onSearch}

@@ -1,0 +1,9 @@
+.button {
+    padding: 3px 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.list {
+    padding: 20px;
+}

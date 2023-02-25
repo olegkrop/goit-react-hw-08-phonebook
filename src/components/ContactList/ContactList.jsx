@@ -21,7 +21,7 @@ export class ContactList extends Component {
               <li key={contact.id}>
                 {contact.name}: {contact.number}
                 <button
-                  className={style.contactListButton}
+                  className={style.button}
                   id={contact.id}
                   type="button"
                   onClick={onRemove}
