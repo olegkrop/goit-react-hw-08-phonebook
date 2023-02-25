@@ -1,5 +1,9 @@
 import { Component } from 'react';
+import { nanoid } from 'nanoid';
 import { Section } from './Section/Section';
+import { ContactForm } from './ContactForm/ContactForm';
+import { ContactList } from './ContactList/ContactList';
+import { Filter } from './Filter/Filter';
 import style from './App.module.css';
 
 export class App extends Component {
@@ -13,12 +17,58 @@ export class App extends Component {
     filter: '',
   };
 
+  onSubmit = ({ event, name, number }) => {
+    event.preventDefault();
+    const contact = {
+      id: nanoid(),
+      name: name,
+      number: number,
+    };
+
+    const nameExist = this.state.contacts.find(
+      contact => contact.name === name
+    );
+    const numberExist = this.state.contacts.find(
+      contact => contact.number === number
+    );
+
+    if (nameExist) {
+      alert(`${name} is already in contacts`);
+    } else if (numberExist) {
+      alert(`This number ${number} is already in contacts`);
+    } else
+      this.setState({
+        contacts: [...this.state.contacts, contact],
+      });
+  };
+
+  onSearch = event => {
+    event.preventDefault();
+    const { value } = event.target;
+    this.setState({ filter: value });
+  };
+
+  onRemove = event => {
+    const { contacts } = this.state;
+    const filtered = contacts.filter(contact => contact.id !== event.target.id);
+    this.setState({ contacts: filtered });
+  };
+
   render() {
     return (
       <>
         <div className={style.boxApp}>
-          <Section title="Phonebook"></Section>
-          <Section title="Contacts"></Section>
+          <Section title="Phonebook">
+            <ContactForm onSubmit={this.onSubmit} />
+          </Section>
+          <Section title="Contacts">
+            <Filter onSearch={this.onSearch} filter={this.state.filter} />
+            <ContactList
+              onRemove={this.onRemove}
+              contacts={this.state.contacts}
+              filter={this.state.filter}
+            />
+          </Section>
         </div>
       </>
     );
