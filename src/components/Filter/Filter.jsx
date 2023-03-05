@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './Filter.module.css';
 
-export function Filter({ value, onChange }) {
+const Filter = ({ value, onChange }) => {
   return (
     <label>
       <h2>Contacts</h2>
@@ -11,9 +11,10 @@ export function Filter({ value, onChange }) {
       <input type="text" value={value} onChange={onChange} />
     </label>
   );
-}
+};
 
 Filter.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
+export default Filter;
