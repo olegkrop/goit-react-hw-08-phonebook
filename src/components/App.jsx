@@ -1,12 +1,11 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { Section } from './Section/Section';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import style from './App.module.css';
 
-export class App extends Component {
+class App extends Component {
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -15,47 +14,52 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
+    name: '',
+    number: '',
+    id: '',
   };
 
-  onSubmit = ({ event, name, number }) => {
-    event.preventDefault();
+  handleAddContact = data => {
+    const existingContactsNames = this.state.contacts.map(({ name }) =>
+      name.toLowerCase()
+    );
+    if (existingContactsNames.includes(data.name.toLowerCase())) {
+      alert(`${data.name} is already in contacts`);
+      return;
+    }
+
     const contact = {
+      name: data.name,
+      number: data.number,
       id: nanoid(),
-      name: name,
-      number: number,
     };
 
-    const nameExist = this.state.contacts.find(
-      contact => contact.name === name
-    );
-    const numberExist = this.state.contacts.find(
-      contact => contact.number === number
-    );
-
-    if (nameExist) {
-      alert(`${name} is already in contacts`);
-    } else if (numberExist) {
-      alert(`This number ${number} is already in contacts`);
-    } else
-      this.setState({
-        contacts: [...this.state.contacts, contact],
-      });
+    this.setState(({ contacts }) => ({
+      contacts: [contact, ...contacts],
+    }));
   };
 
-  onSearch = event => {
-    event.preventDefault();
-    const { value } = event.target;
-    this.setState({ filter: value });
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
   };
 
-  onRemove = event => {
-    const { contacts } = this.state;
-    const filtered = contacts.filter(contact => contact.id !== event.target.id);
-    this.setState({ contacts: filtered });
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  deleteContact = deleteId => {
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(({ id }) => id !== deleteId),
+    }));
   };
 
   componentDidMount() {
-    // localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     const contacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contacts);
 
@@ -71,23 +75,37 @@ export class App extends Component {
   }
 
   render() {
+    const visibleContacts = this.getVisibleContacts();
+    const containerStyles = {
+      display: 'block',
+      margin: '0 auto',
+      width: '400px',
+    };
+
+    const contactsLength = this.state.contacts.length;
+
     return (
-      <>
-        <div className={style.app}>
-          <Section title="Phonebook">
-            <ContactForm onSubmit={this.onSubmit} />
-          </Section>
-          <p></p>
-          <Section title="Contacts">
-            <Filter onSearch={this.onSearch} filter={this.state.filter} />
-            <ContactList
-              onRemove={this.onRemove}
-              contacts={this.state.contacts}
-              filter={this.state.filter}
-            />
-          </Section>
-        </div>
-      </>
+      <div style={containerStyles}>
+        <ContactForm onSubmit={this.handleAddContact} />
+        {contactsLength > 0 ? (
+          <>
+            <div className={style.section}>
+              <Filter value={this.state.filter} onChange={this.changeFilter} />
+              <ContactList
+                contacts={visibleContacts}
+                deleteContact={this.deleteContact}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <Filter value={this.state.filter} onChange={this.changeFilter} />
+            <p className={style.label}>No contacts</p>
+          </>
+        )}
+      </div>
     );
   }
 }
+
+export default App;
