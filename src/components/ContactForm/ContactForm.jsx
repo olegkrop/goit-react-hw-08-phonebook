@@ -5,6 +5,7 @@ import {
   useFetchContactsQuery,
 } from 'redux/contactsSlice';
 import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
 import style from './ContactForm.module.css';
 
 const ContactForm = () => {
@@ -74,9 +75,15 @@ const ContactForm = () => {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-        <button type="submit" className={style.button}>
+        <div className={style.button}>
+          <Button variant="contained" type="submit" size="small">
+            Add contact
+          </Button>
+        </div>
+
+        {/* <button type="submit" className={style.button}>
           Add contact
-        </button>
+        </button> */}
         {isLoading && (
           <CircularProgress
             size={60}

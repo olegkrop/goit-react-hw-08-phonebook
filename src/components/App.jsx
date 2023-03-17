@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 const containerStyles = {
   display: 'block',
   margin: '0 auto',
-  width: '400px',
+  width: '600px',
 };
 
 const App = () => {

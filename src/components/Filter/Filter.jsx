@@ -16,7 +16,12 @@ const Filter = () => {
   return (
     <label>
       <p className={style.title}>Find contacts by name</p>
-      <input type="text" value={filter} onChange={onChange} />
+      <input
+        className={style.input}
+        type="text"
+        value={filter}
+        onChange={onChange}
+      />
     </label>
   );
 };

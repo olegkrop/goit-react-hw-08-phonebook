@@ -1,10 +1,12 @@
 .button {
     margin: 10px 0;
-    width: 100px;
+    margin: 0 auto;
+
+    /* width: 100px;
     padding: 5px 0;
     cursor: pointer;
     margin-top: 25px;
-    margin-bottom: 30px;
+    margin-bottom: 30px; */
 }
 
 .table {
@@ -14,25 +16,27 @@
 }
 
 .label {
-    margin-bottom: 5px;
-    margin-top: 15px;
+    /* margin-bottom: 5px;
+    margin-top: 15px; */
     font-size: 16px;
     font-weight: 700;
 }
 
 input {
+    box-sizing: border-box;
     padding-top: 3px;
     padding-bottom: 3px;
-    width: 250px;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .section {
     width: 100%;
-    max-width: 500px;
+    max-width: 560px;
     display: flex;
     flex-direction: column;
     align-items: left;
     border: 1px solid black;
-    padding-left: 10px;
+    padding: 20px;
     margin-top: 20px;
 }
