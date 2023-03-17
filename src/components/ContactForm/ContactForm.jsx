@@ -79,7 +79,8 @@ const ContactForm = () => {
         </button>
         {isLoading && (
           <CircularProgress
-            size={58}
+            size={60}
+            thickness={6}
             sx={{
               position: 'absolute',
               top: '50%',

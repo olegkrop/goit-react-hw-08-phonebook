@@ -18,10 +18,11 @@ const App = () => {
       <h1>Phonebook</h1>
       <ContactForm />
 
-      <h2>Contacts</h2>
+      <h1>Contacts</h1>
       {isLoading && (
         <CircularProgress
-          size={58}
+          size={60}
+          thickness={6}
           sx={{
             position: 'absolute',
             top: '50%',
