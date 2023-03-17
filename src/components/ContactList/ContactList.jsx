@@ -1,17 +1,13 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact as deleteContactAction } from '../../redux/contactsSlice';
+import { useSelector } from 'react-redux';
+import { useFetchContactsQuery } from 'redux/contactsSlice';
+import ContactItem from '../ContactItem/ContactItem';
 import style from './ContactList.module.css';
 
 const ContactList = () => {
-  const { items: contacts, filter } = useSelector(store => {
-    return store.contacts;
+  const filter = useSelector(store => {
+    return store.filter.value;
   });
-
-  const dispatch = useDispatch();
-
-  const deleteContact = deleteId => {
-    dispatch(deleteContactAction(deleteId));
-  };
+  const { data: contacts = [] } = useFetchContactsQuery();
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
@@ -25,18 +21,10 @@ const ContactList = () => {
 
   return (
     <ul className={style.list}>
-      {visibleContacts.map(({ name, number, id }) => {
+      {visibleContacts.map(contact => {
         return (
-          <li key={id} className={style.contacts__item}>
-            <span className={style.name}>{name}:</span>
-            <span className={style.number}>{number}</span>
-            <button
-              type="button"
-              className={style.button}
-              onClick={() => deleteContact(id)}
-            >
-              Delete
-            </button>
+          <li key={contact.id} className={style.item}>
+            <ContactItem contact={contact} />
           </li>
         );
       })}

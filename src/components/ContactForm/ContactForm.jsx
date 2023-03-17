@@ -1,18 +1,17 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { addContact } from '../../redux/contactsSlice';
+import {
+  useCreateContactMutation,
+  useFetchContactsQuery,
+} from 'redux/contactsSlice';
+import CircularProgress from '@mui/material/CircularProgress';
 import style from './ContactForm.module.css';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
-  const { items: contacts } = useSelector(store => {
-    return store.contacts;
-  });
-
-  const dispatch = useDispatch();
+  const [createContact, { isLoading }] = useCreateContactMutation();
+  const { data: contacts = [] } = useFetchContactsQuery();
 
   const onSubmit = data => {
     const existingContactsNames = contacts.map(({ name }) =>
@@ -29,7 +28,7 @@ const ContactForm = () => {
       id: nanoid(),
     };
 
-    dispatch(addContact(contact));
+    createContact(contact);
   };
 
   const handleNameChange = e => {
@@ -55,7 +54,7 @@ const ContactForm = () => {
   return (
     <div className={style.section}>
       <form onSubmit={handleSubmit} className={style.table}>
-        <label className={style.label}>Name</label>
+        <span className={style.label}>Name</span>
         <input
           type="text"
           name="name"
@@ -65,7 +64,7 @@ const ContactForm = () => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-        <label className={style.label}>Number</label>
+        <span className={style.label}>Number</span>
         <input
           type="tel"
           name="number"
@@ -78,6 +77,17 @@ const ContactForm = () => {
         <button type="submit" className={style.button}>
           Add contact
         </button>
+        {isLoading && (
+          <CircularProgress
+            size={58}
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+        )}
       </form>
     </div>
   );
