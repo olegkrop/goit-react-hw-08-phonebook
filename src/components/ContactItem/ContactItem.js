@@ -22,7 +22,6 @@ const ContactItem = ({ contact }) => {
           style={{
             maxHeight: '25px',
             minHeight: '25px',
-            // padding: '20px 0',
           }}
           startIcon={<DeleteIcon />}
         >
