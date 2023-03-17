@@ -2,7 +2,6 @@ import { useDeleteContactMutation } from 'redux/contactsSlice';
 import CircularProgress from '@mui/material/CircularProgress';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
-
 import PropTypes from 'prop-types';
 import style from './ContactItem.module.css';
 
