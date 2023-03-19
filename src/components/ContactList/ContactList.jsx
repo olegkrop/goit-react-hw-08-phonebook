@@ -1,6 +1,9 @@
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useFetchContactsQuery } from 'redux/contactsSlice';
-import ContactItem from '../ContactItem/ContactItem';
+import ContactItem from '../../components/ContactItem/ContactItem';
+import { getRandomColor } from 'utilities';
+
 import style from './ContactList.module.css';
 
 const ContactList = () => {
@@ -8,11 +11,16 @@ const ContactList = () => {
     return store.filter.value;
   });
   const { data: contacts = [] } = useFetchContactsQuery();
+  const coloredContacts = useMemo(() => {
+    return contacts.map(contact => {
+      return { ...contact, color: getRandomColor() };
+    });
+  }, [contacts]);
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
 
-    return contacts.filter(contact =>
+    return coloredContacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };

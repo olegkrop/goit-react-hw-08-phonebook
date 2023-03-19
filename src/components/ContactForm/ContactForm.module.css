@@ -1,34 +1,42 @@
-.button {
-    margin: 10px 0;
-    margin: 0 auto;
-}
-
-.table {
+._container {
+    width: 400px;
     display: flex;
     flex-direction: column;
-    align-items: left;
-}
-
-.label {
-    font-size: 16px;
-    font-weight: 700;
-}
-
-input {
-    box-sizing: border-box;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-.section {
-    width: 100%;
-    max-width: 560px;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
     border: 1px solid black;
-    padding: 20px;
-    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.addContact__title {
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+._label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+._text {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+._input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid black;
 }

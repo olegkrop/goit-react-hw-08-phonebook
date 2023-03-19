@@ -1,17 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-// const API_URL = 'https://6413554dc469cff60d6077ec.mockapi.io';
+import { API_URL } from './constants';
 
 export const contactsApi = createApi({
   reducerPath: 'contactsApi',
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token;
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
+
   tagTypes: ['Contacts'],
   endpoints: builder => ({
     fetchContacts: builder.query({
       query: () => '/contacts',
       providesTags: ['Contacts'],
+      method: 'GET',
     }),
 
     createContact: builder.mutation({

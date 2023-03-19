@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
+import MoonLoader from 'react-spinners/MoonLoader';
 import {
   useCreateContactMutation,
   useFetchContactsQuery,
 } from 'redux/contactsSlice';
-import CircularProgress from '@mui/material/CircularProgress';
-import Button from '@mui/material/Button';
+import { Button } from '@mui/material';
+
 import style from './ContactForm.module.css';
 
 const ContactForm = () => {
@@ -19,7 +21,7 @@ const ContactForm = () => {
       name.toLowerCase()
     );
     if (existingContactsNames.includes(data.name.toLowerCase())) {
-      alert(`${data.name} is already in contacts`);
+      toast.info(`${data.name} is already in contacts`);
       return;
     }
 
@@ -53,49 +55,45 @@ const ContactForm = () => {
   };
 
   return (
-    <div className={style.section}>
-      <form onSubmit={handleSubmit} className={style.table}>
-        <span className={style.label}>Name</span>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleNameChange}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-        <span className={style.label}>Number</span>
-        <input
-          type="tel"
-          name="number"
-          value={number}
-          onChange={handleNumberChange}
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
-        <div className={style.button}>
-          <Button variant="contained" type="submit" size="small">
-            Add contact
-          </Button>
-        </div>
-
-        {/* <button type="submit" className={style.button}>
-          Add contact
-        </button> */}
-        {isLoading && (
-          <CircularProgress
-            size={60}
-            thickness={6}
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            }}
+    <div className={style._container}>
+      <h1 className={style.addContact__title}>Create new contact</h1>
+      <form onSubmit={handleSubmit} className={style.form}>
+        <label className={style._label}>
+          <span className={style._text}>Name</span>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            placeholder="Name Surtname"
+            onChange={handleNameChange}
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+            className={style._input}
           />
-        )}
+        </label>
+        <label className={style._label}>
+          <span className={style._text}>Number</span>
+          <input
+            type="tel"
+            name="number"
+            value={number}
+            placeholder="XXX-XX-XX"
+            onChange={handleNumberChange}
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            className={style._input}
+          />
+        </label>
+        <Button
+          type="submit"
+          // className={style.contactsAdd__btn}
+          variant="contained"
+        >
+          Add contact
+        </Button>
+        {isLoading && <MoonLoader size={8} />}
       </form>
     </div>
   );
