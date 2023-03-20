@@ -3,9 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { ToastContainer } from 'react-toastify';
-// import { DotLoader } from 'react-spinners';
 import CircularProgress from '@mui/material/CircularProgress';
-
 import { ContactsPage, HomePage, LoginPage, RegistrationPage } from 'pages';
 import { AppBar, PrivateRoute, PublicRoute } from 'components';
 import { useGetUserQuery } from 'redux/userSlice';
@@ -32,7 +30,6 @@ const App = () => {
   return (
     <div style={style}>
       {isLoading ? (
-        // <DotLoader />
         <CircularProgress
           size={60}
           thickness={6}

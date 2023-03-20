@@ -7,7 +7,7 @@ const HomePage = () => {
       <ul className={style.list}>
         <li className={style.item}>
           <div className={style.info}>
-            <h1 className={style.title}>Welcome to simple Phonebook</h1>
+            <h1 className={style.title}>Welcome to Phonebook</h1>
             <h2 className={style.title}>with very basic features:</h2>
             <h2 className={style.title}> </h2>
           </div>
@@ -22,7 +22,7 @@ const HomePage = () => {
         </li>
         <li className={style.item}>
           <div className={style.info}>
-            <h2 className={style.title}>Filter contact</h2>
+            <h2 className={style.title}>Find contacts</h2>
           </div>
           <div className={style.image}>
             <img
