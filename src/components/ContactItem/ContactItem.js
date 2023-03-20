@@ -1,4 +1,4 @@
-import MoonLoader from 'react-spinners/MoonLoader';
+import CircularProgress from '@mui/material/CircularProgress';
 import PropTypes from 'prop-types';
 import ContactIcon from '../ContactIcon/ContactIcon';
 import { useDeleteContactMutation } from 'redux/contactsSlice';
@@ -26,15 +26,22 @@ const ContactItem = ({ contact }) => {
         onClick={() => deleteContact(id)}
       >
         <DeleteIcon />
-        {isLoading && <MoonLoader size={8} />}
       </IconButton>
+      {isLoading && (
+        <CircularProgress
+          size={60}
+          thickness={6}
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      )}
     </div>
   );
 };
-
-<IconButton aria-label="delete">
-  <DeleteIcon />
-</IconButton>;
 
 ContactItem.propTypes = {
   contact: PropTypes.shape({
