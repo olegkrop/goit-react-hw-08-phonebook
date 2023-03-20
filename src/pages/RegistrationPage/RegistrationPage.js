@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { DotLoader } from 'react-spinners';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import { toast } from 'react-toastify';
 import { setUserAuth } from 'redux/authSlice';
 import { useRegisterMutation } from 'redux/userSlice';
@@ -111,8 +112,20 @@ const RegistrationPage = () => {
           />
         </label>
         <Button type="submit" className={style.btn} variant="contained">
-          {isRegisterLoading ? <DotLoader size={20} color="white" /> : 'Submit'}
+          Submit
         </Button>
+        {isRegisterLoading && (
+          <CircularProgress
+            size={60}
+            thickness={6}
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+        )}
       </form>
       <div className={style.registratin__link}>
         <span></span>
