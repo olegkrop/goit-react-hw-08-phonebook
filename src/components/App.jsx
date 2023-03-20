@@ -3,7 +3,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { ToastContainer } from 'react-toastify';
-import { DotLoader } from 'react-spinners';
+// import { DotLoader } from 'react-spinners';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import { ContactsPage, HomePage, LoginPage, RegistrationPage } from 'pages';
 import { AppBar, PrivateRoute, PublicRoute } from 'components';
 import { useGetUserQuery } from 'redux/userSlice';
@@ -30,7 +32,17 @@ const App = () => {
   return (
     <div style={style}>
       {isLoading ? (
-        <DotLoader />
+        // <DotLoader />
+        <CircularProgress
+          size={60}
+          thickness={6}
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
       ) : (
         <>
           <BrowserRouter basename="/goit-react-hw-08-phonebook">
