@@ -29,7 +29,7 @@
     height: 100px;
 }
 
-.item__info {
+.info {
     display: flex;
     flex-direction: column;
     align-items: flex-start;

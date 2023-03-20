@@ -33,7 +33,6 @@ const App = () => {
         <DotLoader />
       ) : (
         <>
-          {/* <BrowserRouter basename="//"> */}
           <BrowserRouter basename="/goit-react-hw-08-phonebook">
             <Suspense fallback={<p>Loading...</p>}>
               <AppBar />
