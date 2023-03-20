@@ -41,7 +41,7 @@ const RegistrationPage = () => {
       return false;
     }
     if (password !== confirmPassword) {
-      toast.warning('Password don`t match');
+      toast.warning('Password dones not match');
       return false;
     }
     return true;

@@ -5,9 +5,10 @@ import style from './Nav.module.css';
 const StyledLink = styled(NavLink)`
   color: rgb(100, 100, 100);
   display: block;
+  font-weight: 700;
+
   &.active {
     color: rgb(0, 0, 0);
-    font-size: 700;
   }
 `;
 
