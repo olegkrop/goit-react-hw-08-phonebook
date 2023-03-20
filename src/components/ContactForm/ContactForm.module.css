@@ -1,4 +1,4 @@
-._container {
+.container {
     width: 400px;
     display: flex;
     flex-direction: column;
@@ -9,7 +9,7 @@
     border-radius: 4px;
 }
 
-.addContact__title {
+.title {
     justify-content: center;
     margin-bottom: 30px;
 }
@@ -21,19 +21,19 @@
     flex-direction: column;
 }
 
-._label {
+.label {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-bottom: 10px;
 }
 
-._text {
+.text {
     margin-bottom: 5px;
     font-weight: 500;
 }
 
-._input {
+.input {
     width: 100%;
     box-sizing: border-box;
     padding: 5px;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
-import MoonLoader from 'react-spinners/MoonLoader';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import {
   useCreateContactMutation,
   useFetchContactsQuery,
@@ -55,11 +56,11 @@ const ContactForm = () => {
   };
 
   return (
-    <div className={style._container}>
-      <h1 className={style.addContact__title}>Create new contact</h1>
+    <div className={style.container}>
+      <h1 className={style.title}>Create new contact</h1>
       <form onSubmit={handleSubmit} className={style.form}>
-        <label className={style._label}>
-          <span className={style._text}>Name</span>
+        <label className={style.label}>
+          <span className={style.text}>Name</span>
           <input
             type="text"
             name="name"
@@ -69,11 +70,11 @@ const ContactForm = () => {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            className={style._input}
+            className={style.input}
           />
         </label>
-        <label className={style._label}>
-          <span className={style._text}>Number</span>
+        <label className={style.label}>
+          <span className={style.text}>Number</span>
           <input
             type="tel"
             name="number"
@@ -83,17 +84,24 @@ const ContactForm = () => {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            className={style._input}
+            className={style.input}
           />
         </label>
-        <Button
-          type="submit"
-          // className={style.contactsAdd__btn}
-          variant="contained"
-        >
+        <Button type="submit" variant="contained">
           Add contact
         </Button>
-        {isLoading && <MoonLoader size={8} />}
+        {isLoading && (
+          <CircularProgress
+            size={60}
+            thickness={6}
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+        )}
       </form>
     </div>
   );
